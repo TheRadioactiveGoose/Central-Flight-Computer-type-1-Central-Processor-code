@@ -56,7 +56,7 @@ void commandParse(String command, bool isCommand, int commandKey)
 }
 }
 
-void commandAction(int commandKey)
+void commandAction(int commandKey, char commandBuffer[16], bool testResult)
 {
     switch (commandKey)
     {
@@ -77,7 +77,7 @@ void commandAction(int commandKey)
             break;
 
         case 4: //SET1 (set the BMP388 sea level pressure based on the inputted command buffer)
-            setPressureBMP();
+            setPressureBMP(commandBuffer);
             break;
 
         case 5: //CAL2 (calibrate BNO055)
@@ -89,7 +89,7 @@ void commandAction(int commandKey)
             break;
 
         case 7: //FGCT (test the flight guidance computer)
-            testFGC();
+            testFGC(commandBuffer, testResult);
             break;
 
         case 8: //FGC0 (flight guidance computer off)

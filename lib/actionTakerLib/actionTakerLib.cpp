@@ -20,7 +20,7 @@ void calibrateBMP ()
 
 }
 
-void setPressureBMP ()
+void setPressureBMP (char commandBuffer[16])
 {
 
 }
@@ -35,7 +35,7 @@ void FGCon ()
 
 }
 
-void testFGC ()
+void testFGC (char commandBuffer[16], bool testResult)
 {
 
 }
