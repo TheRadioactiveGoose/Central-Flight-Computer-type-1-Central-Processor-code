@@ -1,11 +1,16 @@
 #include <Arduino.h>
+#include "Adafruit_BMP3XX.h"
+#include "Wire.h"
+#include "Adafruit_Sensor.h"
+#include "SPI.h"
+#include "Adafruit_BNO055.h"
 #include "actionTakerLib.h"
 
 void commandParse(String command, bool isCommand, int commandKey)
 {
     #define CMD(a,b,c,d) (((uint32_t)(a) << 24) | ((uint32_t)(b) << 16) | ((uint32_t)(c) << 8) | (uint32_t)(d)) //defines CMD as a command that will parse the uint32_t into its individual letters, for the switch command.
 
-    uint32_t commandHash =((uint32_t)command[0] << 24) | ((uint32_t)command[1] << 16) | ((uint32_t)command[2] << 8) |  (uint32_t)command[3]; //this parses the string of letters into the uint32_t that represents those letters
+    uint32_t commandHash =((uint32_t)command[1] << 24) | ((uint32_t)command[2] << 16) | ((uint32_t)command[3] << 8) |  (uint32_t)command[4]; //this parses the string of letters into the uint32_t that represents those letters
 
     switch (commandHash) {
     
@@ -56,7 +61,7 @@ void commandParse(String command, bool isCommand, int commandKey)
 }
 }
 
-void commandAction(int commandKey, char commandBuffer[16], bool testResult)
+void commandAction(bool isChutePopped, int parachuteChargePin1, int commandKey, char commandBuffer[16], bool testResult, Adafruit_BMP3XX bmp, Adafruit_BNO055 bno, int seaLevelPressure)
 {
     switch (commandKey)
     {
@@ -73,15 +78,15 @@ void commandAction(int commandKey, char commandBuffer[16], bool testResult)
             break;
 
         case 3: //CAL1 (calibrate BMP388)
-            calibrateBMP();
+            calibrateBMP(bmp, seaLevelPressure, testResult);
             break;
 
         case 4: //SET1 (set the BMP388 sea level pressure based on the inputted command buffer)
-            setPressureBMP(commandBuffer);
+            setPressureBMP(bmp, commandBuffer, seaLevelPressure);
             break;
 
         case 5: //CAL2 (calibrate BNO055)
-            calibrateBNO();
+            calibrateBNO(bno, testResult);
             break;
 
         case 6: //FGC1 (flight guidance computer on)
@@ -97,7 +102,7 @@ void commandAction(int commandKey, char commandBuffer[16], bool testResult)
             break;
 
         case 9: //ABRT (ABORT LAUNCH - pop chute immediately, cancel all guidance, etc)
-            ABORT();
+            ABORT(isChutePopped, parachuteChargePin1);
             break;
     }
 }
