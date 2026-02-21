@@ -106,3 +106,11 @@ void popChute (bool isChutePopped, int parachuteChargePin1)
     analogWrite(parachuteChargePin1, HIGH); // puts the pin on high, pumping all 3.3V of power through it to ignite the charge
     isChutePopped = true;
 }
+
+void popMainChute (bool isChutePopped, int parachuteChargePin2)
+{
+    if (isChutePopped) // if the drogue chute has been popped, and the FGC calls this command, then:
+    {
+        analogWrite(parachuteChargePin2, HIGH); // puts the pin on high, pumping all 3.3V of power through it to ignite the charge
+    }   
+}
