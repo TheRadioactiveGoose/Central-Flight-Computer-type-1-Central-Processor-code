@@ -2,6 +2,10 @@
 #define actionTakerLib_H
 
 #include <Arduino.h>
+#include "Adafruit_BMP3XX.h"
+#include "Wire.h"
+#include "Adafruit_Sensor.h"
+#include "SPI.h"
 
 void cameraOn ();
 void cameraOff ();
@@ -13,6 +17,5 @@ void FGCon ();
 void testFGC (char commandBuffer[16], bool testResult);
 void FGCoff ();
 void ABORT ();
-void Pair ();
 
 #endif
