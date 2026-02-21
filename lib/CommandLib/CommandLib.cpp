@@ -61,7 +61,7 @@ void commandParse(String command, bool isCommand, int commandKey)
 }
 }
 
-void commandAction(int commandKey, char commandBuffer[16], bool testResult, Adafruit_BMP3XX bmp, Adafruit_BNO055 bno, int seaLevelPressure)
+void commandAction(bool isChutePopped, int parachuteChargePin1, int commandKey, char commandBuffer[16], bool testResult, Adafruit_BMP3XX bmp, Adafruit_BNO055 bno, int seaLevelPressure)
 {
     switch (commandKey)
     {
@@ -102,7 +102,7 @@ void commandAction(int commandKey, char commandBuffer[16], bool testResult, Adaf
             break;
 
         case 9: //ABRT (ABORT LAUNCH - pop chute immediately, cancel all guidance, etc)
-            ABORT();
+            ABORT(isChutePopped, parachuteChargePin1);
             break;
     }
 }

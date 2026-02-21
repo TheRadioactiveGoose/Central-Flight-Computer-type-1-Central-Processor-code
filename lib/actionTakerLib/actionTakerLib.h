@@ -18,7 +18,8 @@ void calibrateBNO (Adafruit_BNO055 bno, bool testResult);
 void FGCon ();
 void testFGC (char commandBuffer[16], bool testResult);
 void FGCoff ();
-void ABORT ();
-void popChute ();
+void ABORT (bool isChutePopped, int parachuteChargePin1);
+void popChute (bool isChutePopped, int parachuteChargePin1);
+void popMainChute(bool isChutePopped, int parachuteChargePin2);
 
 #endif
