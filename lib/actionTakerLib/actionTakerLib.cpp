@@ -95,13 +95,14 @@ void FGCoff ()
 return;
 }
 
-void ABORT ()
+void ABORT (bool isChutePopped, int parachuteChargePin1)
 {
-    popChute();
+    popChute(isChutePopped, parachuteChargePin1);
     FGCoff();
 }
 
-void popChute ()
+void popChute (bool isChutePopped, int parachuteChargePin1)
 {
-
+    analogWrite(parachuteChargePin1, HIGH); // puts the pin on high, pumping all 3.3V of power through it to ignite the charge
+    isChutePopped = true;
 }
