@@ -17,5 +17,6 @@ void FGCon ();
 void testFGC (char commandBuffer[16], bool testResult);
 void FGCoff ();
 void ABORT ();
+void popChute ();
 
 #endif

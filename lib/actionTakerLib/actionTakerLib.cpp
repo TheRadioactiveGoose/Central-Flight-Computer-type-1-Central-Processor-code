@@ -35,9 +35,7 @@ void calibrateBMP (Adafruit_BMP3XX bmp, int seaLevelPressure, bool testResult)
 
 void setPressureBMP (char commandBuffer[16], int seaLevelPressure)
 {
-    memcpy(&seaLevelPressure, &commandBuffer[4], 4);
-
-
+    memcpy(&seaLevelPressure, &commandBuffer[4], 4); //figure out the length of how many characters the sea level pressure is and change the 4 to that number, and also make sure it is divided properly to match that
 }
 
 void calibrateBNO ()
@@ -61,6 +59,12 @@ void FGCoff ()
 }
 
 void ABORT ()
+{
+    popChute();
+    FGCoff();
+}
+
+void popChute ()
 {
 
 }
