@@ -2,6 +2,7 @@
 #include "Adafruit_BMP3XX.h"
 #include "RH_RF95.h"
 #include "Adafruit_BNO055.h"
+#include "Adafruit_GPS.h"
 
 void BMP388_Initialization (Adafruit_BMP3XX bmp, bool systemsGo)
 {
@@ -54,4 +55,17 @@ void BNO055_Initialization (Adafruit_BNO055 bno, bool systemsGo)
         systemsGo = false;
         return;
     }
+    Serial.println("BNO055 Initialization complete");
+}
+
+void Adafruit_GPS_Initialization (Adafruit_GPS GPS, bool systemsGo)
+{
+    GPS.begin(0x10);
+    if (!GPS.begin(0x10))
+    {
+        Serial.print("CRITICAL ERROR DETECTED; GPS NOT FOUND / UNRESPONSIVE; EXITING SYSTEM");
+        systemsGo = false;
+        return;
+    }
+    Serial.println("GPS Initialization complete");
 }
