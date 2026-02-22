@@ -6,7 +6,7 @@
 
 void BMP388_Initialization (Adafruit_BMP3XX bmp, bool systemsGo)
 {
-    bmp.begin_I2C(); // find out if necessary, ask dad
+    //begin_I2C(); // find out if necessary, ask dad. probably isn't.
     if (!bmp.begin_I2C())
     {
         Serial.println("CRITICAL ERROR DETECTED; BMP388 NOT FOUND / UNRESPONSIVE; EXITING SYSTEM");
